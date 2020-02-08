@@ -1,0 +1,109 @@
+<div class="container jumbotron">
+   <form #empForm="ngForm" (ngSubmit)="onFormSubmit(empForm.value)" novalidate>
+      <h2 align="center">CAT EXAM 2019 Form</h2>
+      <div class="form-group">
+         <label>ID</label>
+         <input type="text" #idRef="ngModel" name="id" class="form-control" ngModel>
+      </div>
+      <div class="form-group">
+         <label>Name</label>
+         <input type="text" #nameRef="ngModel" required name="name" class="form-control" autocomplete="off" ngModel>
+         <div *ngIf="nameRef.dirty && nameRef.invalid" class="alert alert-danger">
+            <p>Please Enter Name</p>
+         </div>
+      </div>
+      <div class="form-group">
+         <label>Salary</label>
+         <input type="text" #salaryRef="ngModel" required minlength="6" name="salary" maxlength="10" class="form-control"
+            ngModel>
+         <div *ngIf="salaryRef.dirty && salaryRef.errors?.minlength" class="alert alert-danger">
+            <p>Please Enter At Least 6 Digit</p>
+         </div>
+         <div *ngIf="salaryRef.dirty && salaryRef.errors?.maxlength" class="alert alert-danger">
+            <p>Please Enter At Most 10 Digit</p>
+         </div>
+      </div>
+      <div class="form-group">
+         <label>Email</label>
+         <input type="email" #emailRef="ngModel" required pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email"
+            class="form-control" ngModel>
+
+         <div *ngIf="emailRef.dirty && emailRef.errors?.pattern" class="alert alert-danger">
+            <p>Please Enter Valid Email-ID</p>
+         </div>
+      </div>
+      <div class="form-group">
+         <input type="checkbox" value="Angular" name="Angular1" #angRef="ngModel" ngModel> Angular
+         <input type="checkbox" value="Reactjs" name="Angular1" #angRef="ngModel" ngModel> React
+         <input type="checkbox" value="Vuejs" name="Angular1" #angRef="ngModel" ngModel> Vue
+      </div>
+      <div class="form-group">
+         <label>Select Gender</label> <br>
+         <input type="radio" #radio1Ref="ngModel" name="gender" value="Male" ngModel> Male <br>
+         <input type="radio" #radio2Ref="ngModel" name="gender" value="Female" ngModel> Female
+      </div>
+      <div class="form-group">
+         <label>Age</label>
+         <input type="number" #ageRef="ngModel" name="age" class="form-control" ngModel>
+      </div>
+      <div class="form-group">
+         <label>Mobile Number</label>
+         <input type="number" #ageRef="ngModel" name="mobile" class="form-control" ngModel>
+      </div>
+      <div ngModelGroup="address">
+         <div class="form-group">
+            <label>City</label>
+            <input type="text" #cityRef="ngModel" pattern="[a-zA-z]{1,15}" name="city" class="form-control" ngModel>
+            <div *ngIf="cityRef.dirty && cityRef.errors?.pattern" class="alert alert-danger">
+               <p>Please Enter Valid City</p>
+            </div>
+         </div>
+      </div>
+      <button [disabled]="!empForm.valid" class="btn btn-primary">Submit</button>
+   </form>
+   <div class="alert-box" *ngIf="popup==true">
+      <div class="alert alert-success">
+         <div class="alert-message text-center"> 
+            <strong>Successfully</strong> New Employee Added!
+         </div>
+      </div>
+   </div>
+   <div class="form-group">
+      <label>Search Employee</label> <br>
+      <input type="text" [(ngModel)]="usearch">
+   </div>
+   <div>
+      <h1 align="center">Employee List</h1>
+      <div>
+         <div>
+            <table class="table table-border">
+               <tr>
+                  <th>ID</th>
+                  <th>Name</th>
+                  <th>Email</th>
+                  <th>Age</th>
+                  <th>Gender</th>
+                  <th>Option</th>
+
+               </tr>
+               <tr *ngFor="let item of employee | filter : usearch ">
+                  <td>{{item.id}}</td>
+                  <td>{{item.name}}</td>
+                  <td>{{item.email}}</td>
+                  <td>{{item.age}}</td>
+                  <td>{{item.gender}}</td>
+                  <td>
+                     <button class="fa fa-trash" aria-hidden="true" (click)="onDelete(item.id)"></button>
+                     <button class="fa fa-pencil-square" aria-hidden="true" (click)="onUpdate(item.id)"></button>
+                     <button class="fa fa-eye" aria-hidden="true" (click)="onView(item.id)"></button>
+                  </td>
+
+               </tr>
+            </table>
+         </div>
+      </div>
+   </div>
+</div>
+
+<!-- <th>Course</th> -->
+<!-- <td>{{item.Angular1?"Angular":""}}</td> -->

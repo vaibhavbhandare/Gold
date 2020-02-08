@@ -1,0 +1,33 @@
+<div class="container">
+    
+    <h2 align="center">Edit Employee Details</h2>
+    <div *ngFor="let item of obarr">
+        <div *ngIf="item.id==obselectedid">
+            <form #empForm="ngForm">
+                <div class="form-group">
+                    <label>ID</label>
+                    <input type="text" class="form-control" name="id" [ngModel]="item.id" ngModel>
+                </div>
+                <div class="form-group">
+                    <label>Name</label>
+                    <input type="text" class="form-control" name="name" [ngModel]="item.name" ngModel>
+                </div>
+                <div class="form-group">
+                <label>Gender</label> <br>
+                <input type="radio" name="gender" [ngModel]="item.gender" value="Male" ngModel> Male <br>
+                <input type="radio" name="gender" [ngModel]="item.gender" value="Female" ngModel> Female
+                </div>
+                <div class="form-group">
+                    <label>Email</label>
+                    <input type="text" class="form-control" name="email" [ngModel]="item.email" ngModel>
+                </div>
+                <div class="form-group">
+                    <label>Age</label>
+                    <input type="text" class="form-control" name="age" [ngModel]="item.age" ngModel>
+                </div>
+
+                <button class="btn btn-secondary" (click)="onSave(empForm.value)">Save</button>
+            </form>
+        </div>
+    </div>
+</div>

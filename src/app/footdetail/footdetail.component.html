@@ -1,0 +1,27 @@
+<p>footdetail works!</p>
+<div class="container">
+    <ng-container *ngFor="let item of getdata">
+        <ng-container *ngIf="item.id==getid">
+            <form #footDet="ngForm" (ngSubmit)="updatedet(footDet)">
+             <div class="form-group">
+               <label for="id">ID</label>
+               <input type="text" class="form-control" name="id" [ngModel]="item.id" required>
+             </div>
+             <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" name="name" [ngModel]="item.name" required>
+              </div>
+              <div class="form-group">
+                <label for="age">age</label>
+                <input type="text" class="form-control" name="age" [ngModel]="item.age" required>
+              </div>
+              <div class="form-group">
+                <label for="mob">mob</label>
+                <input type="text" class="form-control" name="mob" [ngModel]="item.mob" required>
+              </div>
+              <button class="btn btn-success" [disabled]="!footDet.form.valid">Update</button>
+              <button (click)="cancle()" class="btn btn-danger">Cancle</button>
+            </form>
+        </ng-container>
+    </ng-container>
+</div>

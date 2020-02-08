@@ -1,0 +1,29 @@
+<div class="container">
+    <h2 align="center">Employee Details</h2>
+    <div *ngFor="let item of data">
+        <div *ngIf="item.id==selectedid">
+        <table class="table table-border" >
+            <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Email</th>
+                <th>Age</th>
+                <th>Gender</th>
+                <th>Course</th>
+                
+            </tr>
+            <tr >
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.email}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.gender}}</td>
+                <td>{{item.Angular1?"Angular":""}}</td>
+            </tr>
+        </table>
+        <button class="fa fa-fast-backward" aria-hidden="true" (click)="onBack()"> Observe</button>
+        <button align="center" class="fa fa-arrow-left" aria-hidden="true" (click)="onPrevious()">Previous </button>
+        <button class="fa fa-arrow-right" aria-hidden="true" (click)="onNext()">Next</button>
+    </div>
+    </div>
+</div>

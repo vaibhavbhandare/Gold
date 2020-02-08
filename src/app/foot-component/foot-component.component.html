@@ -1,0 +1,77 @@
+<div class="container">
+    <div>
+        <ng-template [ngTemplateOutlet]="outlet" [ngOutletContext]="context"></ng-template>
+        <template></template>
+        <h1>Football Players In India</h1>
+    </div>
+    <div>
+        <form #footform="ngForm" (ngSubmit)="onSubmit(footform)">
+            <div class="form-group">
+                <label for="id">ID</label>
+                <input type="text" class="form-control" #idRef="ngModel" required [(ngModel)]="id" name="id">
+            </div>
+            <div class="form-group">
+                <label for="name">Name</label>
+                <input type="text" class="form-control" #nameRef="ngModel" required name="name" [(ngModel)]="name"
+                    minlength="4" appForbiddenName="bob">
+                <div *ngIf="nameRef.invalid && (nameRef.dirty || nameRef.touched)" class="alert alert-danger">
+
+                    <div *ngIf="nameRef.errors.required">
+                        Name is required.
+                    </div>
+                    <div *ngIf="nameRef.errors.minlength">
+                        Name must be at least 4 characters long.
+                    </div>
+                    <div *ngIf="nameRef.errors.forbiddenName">
+                        Name cannot be Bob.
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <label for="age">Age</label>
+                <select name="" id="" class="form-control" required [(ngModel)]="age" name="age">
+                    <option *ngFor="let age of agenumber" [value]="age">{{age}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <label for="mob">Contact</label>
+                <input type="text" class="form-control" #mobRef="ngModel" required [(ngModel)]="mob"
+                minlength="10" name="mob">
+              <div *ngIf="mobRef.invalid && (mobRef.dirty || mobRef.touched)" class="alert alert-danger">
+                 <div *ngIf="mobRef.errors.required">
+                    MOb Required
+                 </div>
+                 <div *ngIf="mobRef.errors.minlength">
+                   10 digit required
+                 </div>
+              </div>
+            </div>
+            <button type="submit" class="btn btn-success" [disabled]="!footform.form.valid">Submit</button>
+        </form>
+    </div>
+    <div>
+        <div>
+            <input type="text" [(ngModel)]="datasearch" name="datasearch">
+        </div>
+        <table class="table table-border">
+            <tr>
+                <th>ID</th>
+                <th>Name Of Company</th>
+                <th>Age</th>
+                <th>MOB</th>
+                <th>Change Player</th>
+            </tr>
+            <tr *ngFor="let item of footdata |footpipe:datasearch ; let i=index">
+                <td>{{item.id}}</td>
+                <td>{{item.name}}</td>
+                <td>{{item.age}}</td>
+                <td>{{item.mob}}</td>
+                <td>
+                    <button (click)="delete(item.id)"><i class="fa fa-trash" aria-hidden="true"></i>Delete</button>
+                    <button (click)="showdata(item.id)"><i class="fa fa-eye" aria-hidden="true"></i>Show</button>
+                    <button>Update</button>
+                </td>
+            </tr>
+        </table>
+    </div>
+</div>

@@ -1,0 +1,8 @@
+.box h1
+{
+   padding: 25px;
+   border: 20px solid black;
+   margin: 150px;
+   background-color: lightgrey;
+   width: 300px;
+}

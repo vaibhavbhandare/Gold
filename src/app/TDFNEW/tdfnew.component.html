@@ -1,0 +1,115 @@
+<div class="container jumbotron">
+    <form #cricketRef="ngForm">
+        <div class="col-sm-6">
+            <div class="form-group">
+                <h2>Enter ID</h2>
+                <input type="number" #idRef="ngModel" name="id" class="form-control" ngModel>
+            </div>
+            <div class="form-group">
+                <h2>First Name</h2>
+                <input type="text" #fnameRef="ngModel" style="text-transform:capitalize" minlength="5" maxlength="15"
+                    name="fname" required class="form-control" ngModel>
+                <div *ngIf="fnameRef.pristine && fnameRef.touched" class="alert alert-danger">
+                    <p>Please Enter Valid First Name</p>
+                </div>
+                <div *ngIf="fnameRef.dirty && fnameRef.errors?.maxlength">
+                    <p>Maximum 10 Characters Allowed</p>
+                </div>
+                <div *ngIf="fnameRef.dirty && fnameRef.errors?.minlength" class="alert alert-danger">
+                    <p>Minimun 10 and Max 15 Character are Allowed</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <h2>last Name</h2>
+                <input type="text" #lnameRef="ngModel" style="text-transform:capitalize" required minlength="5"
+                    maxlength="15" name="lname" class="form-control" ngModel>
+                <div *ngIf="lnameRef.pristine && lnameRef.touched" class="alert alert-danger">
+                    <p>Please Enter Valid Last Name</p>
+                </div>
+                <div *ngIf="lnameRef.dirty && lnameRef.errors?.maxlength" class="alert alert-danger">
+                    <p>Please Enter Max 15 Characters</p>
+                </div>
+                <div *ngIf="lnameRef.dirty && lnameRef.errors?.minlength" class="alert alert-danger">
+                    <p>Minimum 10 and Maximum 15 Characters Are Allowed</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <h2>Select Position</h2>
+                <select class="form-control" #optionRef="ngModel" name="role" ngModel>
+                    <option *ngFor="let item of role" [value]="item">{{item}}</option>
+                </select>
+            </div>
+            <div class="form-group">
+                <h2>Email</h2>
+                <input type="text" required #emailRef="ngModel" pattern="[a-z0-9._%+-]+@[a-z0-9.-]+\.[a-z]{2,}$" name="email"
+                    class="form-control" ngModel>
+                <div *ngIf="emailRef.pristine && emailRef.touched" class="alert alert-danger">
+                    <p>Please Enter Valid Email ID</p>
+                </div>
+                <div *ngIf="emailRef.dirty && emailRef.errors?.pattern" class="alert alert-danger">
+                    <p>Please Enter Valid Email ID</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <h2>Salary</h2>
+                <input type="text" name="salary" #salaryRef="ngModel" minlength="5" maxlength="10" class="form-control"
+                    ngModel>
+                <div *ngIf="salaryRef.pristine && salaryRef.touched" class="alert alert-danger">
+                    <p>Please Enter Valid Salary</p>
+                </div>
+                <div *ngIf="salaryRef.dirty && salaryRef.errors?.minlength" class="alert alert-danger">
+                    <p>Please Enter Salary Between 5-10 Digit</p>
+                </div>
+            </div>
+           
+        </div>
+        <div class="col-sm-6">
+            <div ngModelGroup="address">
+                <div class="form-group">
+                    <h2>Description</h2>
+                    <textarea #textRef="ngModel" name="text" cols="70" rows="5" ngModel>Enter here....</textarea>
+                </div>
+                <div class="form-group">
+                    <h2>City</h2>
+                    <input type="text" #cityRef="ngModel" name="city" pattern="[a-zA-Z]{2,15}" class="form-control"
+                        ngModel>
+                    <div *ngIf="cityRef.dirty && cityRef.errors?.pattern" class="alert alert-danger">
+                        <p>Please Enter Valid City</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <h2>Postal Code</h2>
+                    <input type="number" #postalcodeRef="ngModel" required pattern="^[1-9][0-9]{5}$" name="code" class="form-control"
+                        ngModel>
+                    <div *ngIf="postalcodeRef.dirty && postalcodeRef.errors?.pattern" class="alert alert-danger">
+                        <p>Please Enter Valid 6 digit PostalCode</p>
+                    </div>
+                    <div *ngIf="postalcodeRef.pristine && postalcodeRef.touched" class="alert alert-danger">
+                        <p>Please Enter Valid PostalCode</p>
+                    </div>
+                </div>
+            </div>
+            <div class="form-group">
+                <h2>Mobile Number</h2>
+                <input type="text" #mobRef="ngModel" required minlength="13" maxlength="13" placeholder="type +91 and your number"
+                    name="mobile" class="form-control" ngModel>
+                <div *ngIf="mobRef.pristine && mobRef.touched" class="alert alert-danger">
+                    <p>Please Enter Valid Mobile Number</p>
+                </div>
+                <div *ngIf="mobRef.dirty && mobRef.errors?.minlength" class="alert alert-danger">
+                    <p>Please Enter Valid Mobile Number</p>
+                </div>
+            </div>
+            <div class="form-group">
+                <h2>Select Gender</h2>
+                <input type="radio" value="Male" name="gender" #genderRef1="ngModel" ngModel> Male <br>
+                <input type="radio" value="Female" name="gender" #genderRef2="ngModel" ngModel> Female
+            </div>
+            <div class="form-group">
+                <input type="checkbox"  name="check" #checkRef="ngModel" ngModel> <b>Select Checkbox</b><br>
+                <textarea cols="70" rows="2"> I declare All information in above is correct.</textarea>
+            </div>
+        </div>
+        <button class="btn btn-primary" [disabled]="cricketRef.invalid" (click)="onSubmit(cricketRef.value)">Submit</button>
+    </form>
+</div>

@@ -1,0 +1,13 @@
+<div class="container">
+       <div *ngFor="let item of pdata">
+           <div *ngIf="item.id==getid">
+           {{item.name}}
+           </div>
+           
+       </div>
+       <div>
+            <my-child1 (MobEvent)="onGetEvent($event)" >
+               
+                </my-child1>
+       </div>
+</div>

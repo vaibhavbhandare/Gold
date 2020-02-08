@@ -1,0 +1,88 @@
+<div class="container">
+    <h1 align="center">CAT EXAM FORM</h1>
+    <form #studentRef="ngForm">
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <h2>First Name</h2>
+                    <input placeholder="Enter First Name" type="text" #firstnameRef="ngModel" minlength="5" required
+                        name="first" class="form-control" [(ngModel)]="first">
+                    <div *ngIf="firstnameRef.errors && (firstnameRef.dirty || firstnameRef.touched)">
+                        <div [hidden]="!firstnameRef.errors.required" class="alert alert-danger">
+                            <p>Please Enter Valid Name</p>
+                        </div>
+                        <div [hidden]="!firstnameRef.errors.minlength" class="alert alert-danger">
+                            <p>Please Enter At Least 5 Characters</p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <h2>Last Name</h2>
+                    <input type="text" #lastnameRef="ngModel" required name="lastname" class="form-control" [(ngModel)]="lastname">
+                </div>
+
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <h2>Last</h2>
+                    Angular <input type="checkbox" value="Angular" name="ang" [(ngModel)]="ang"> <br>
+                    Html <input type="checkbox" value="Html " name="html" [(ngModel)]="html"><br>
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div>
+                    <h2>Email</h2>
+                    <input type="email" #emailRef="ngModel" pattern="[^@]*@[^@]*" required class="form-control" name="email"
+                        [(ngModel)]="email">
+                    <!-- <div [hidden]="emailRef.valid || emailRef.pristine" class="alert alert-danger">
+                            <p>Please Enter a Valid Email ID</p>
+                        </div> -->
+                    <div *ngIf="emailRef.errors && (emailRef.dirty || emailRef.touched)">
+                        <div [hidden]="!emailRef.errors.required" class="alert alert-danger">
+                            <p>Please Enter Email ID</p>
+                        </div>
+                        <div [hidden]="!emailRef.errors.pattern" class="alert alert-danger">
+                            <p>Please Enter Valid Email ID</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <h2>Postal code</h2>
+                    <input type="number" pattern="^[1-9][0-9]{5}$" #codeRef="ngModel" required name="code" [(ngModel)]="code"
+                        class="form-control">
+                    <div *ngIf="codeRef.errors && (codeRef.dirty || codeRef.touched)">
+                        <div [hidden]="!codeRef.errors.pattern" class="alert alert-danger">
+                            <p>Please Enter At Least 6 Digit Code</p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-sm-6">
+                <div class="form-group">
+                    <h2>Password</h2>
+                    <input type="password" #pwdRef="ngModel" name="password" [(ngModel)]="password" required class="form-control">
+                </div>
+            </div>
+            <div class="col-sm-6">
+                <div class="form-group">
+                  <h2>Confirmed Password</h2>
+                  <input type="password" #cpwdRef="ngModel" name="cpwd" [(ngModel)]="cpwd"  required class="form-control">
+                </div>
+            </div>
+        </div>
+        <button type="button" [disabled]="!studentRef.form.valid" (click)="onCreate(studentRef.value)" class="btn btn-primary">Create</button>
+    </form>
+</div>
+                
+            

@@ -1,0 +1,57 @@
+<div class="container">
+
+    <!-- <ng-template  ngFor let-item [ngForOf]="cricketPlayers">
+        
+         <tr><td> {{item.name}}</td> : <td> {{item.Age}}</td> : <td> {{item.gender}}</td></tr>
+    </ng-template> -->
+    <ng-template [ngIf]="players" [ngIfElse]="defaultTabButtons">
+        <p>Welcome to using ng if else statment</p>
+    </ng-template>
+    <ng-template ngFor let-item [ngForOf]="data">
+
+    </ng-template>
+
+    <ng-template #defaultTabButtons>
+        <div>
+            <button class="tab-button" (click)="login()">{{logintext}}</button>
+            <button class="tab-button" (click)="signup()">{{SignUptext}}</button>
+        </div>
+    </ng-template>
+
+    <!-- <div *ngIf="lessons">
+        <div *ngFor="let lesson of lessons">
+           {{lesson | json }}
+        
+        </div>
+     </div> Instead of using one extra div element go with ng-container 
+            not allowed two sructural directive in one tag-->
+
+    <ng-container *ngIf="lessons">
+        <div *ngFor="let lesson of lessons">
+            {{lesson | json}}
+        </div>
+    </ng-container>
+
+    <!-- It render the template which is present outside with refernce variable -->
+    <ng-container *ngTemplateOutlet = "defaultTabButtons">  </ng-container>
+
+    <ng-template #estimateTemplate let-lessonsCounter="estimate">
+          <div> <h2>The Approximately {{lessonsCounter}} Lessons are Present ....</h2> </div>
+    </ng-template>
+
+    <ng-container *ngTemplateOutlet ="estimateTemplate ; context : ctx"></ng-container>
+
+    <!-- <ng-template #passTelToChild>
+        <button (click)="login()" class="btn btn-success">{{logintext}}</button>
+        <button (click)="signup()" class="btn btn-success">{{SignUptext}}</button>
+    </ng-template> -->
+    
+    <!-- Not Work It Couldent Work
+        <pass-templ [footballTel] = "passTelToChild"></pass-templ>
+     -->
+     <!-- Angular cant allowed to show any Url it could be converted into safe -->
+     <ng-template [ngIf] = "showIframe" align="center">
+        <iframe [src]="showUrl" frameborder="1px" height="500px" width="500px"></iframe>
+     </ng-template>
+
+</div>

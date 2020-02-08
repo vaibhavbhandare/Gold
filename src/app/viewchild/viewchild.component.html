@@ -1,0 +1,118 @@
+<div class="container">
+    <h1 style="text-align: center" id="colour + {{parentdata}}" [welcome]='parentdata'>Welome to My Restaurant</h1>
+    <div class="row">
+        <div class="col-sm-4">
+            <img src="https://banner2.kisspng.com/20190521/zft/kisspng-salad-restaurant-vegetarian-cuisine-menu-dish-5ce4607389cd92.8510563415584707715645.jpg"
+                height="250" width="300">
+        </div>
+        <div class="col-sm-8">
+            <form (ngSubmit)="Submitdishdetails(formRef.value)" #formRef="ngForm" novalidate>
+                <div class="form-group">
+                    <label> Dish Name </label>
+                    <input type="text" name="dish" class="form-control" required #dishRef ngModel>
+                    <div *ngIf="dishRef.dirty && dishRef.touched" class="alert alert-danger">
+                        <p>Please Enter Valid Dish Name</p>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <!--<label>Select Fevourite Food</label>
+                     <select class="form-control">
+                        <option class="form-control" *ngFor="let food of alldishname" name="{{food}}" [(ngModel)]="choosen" >{{food}}</option>
+                    </select> -->
+                </div>
+                <button>Submit</button> &nbsp;
+                <button (click)="homeRef.homemethod()"> Home</button>
+                <input type="radio" name="colors" (click)="parentdata ='lightgreen'">Green
+                <input type="radio" name="colors" (click)="parentdata ='yellow'">Yellow
+                <input type="radio" name="colors" (click)="parentdata ='cyan'">Cyan
+            </form>
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-sm-4">
+            <div>
+                <h1>Food Members 1</h1>
+            </div>
+            <div>
+                <table class="table">
+                   <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                       
+                    </tr>
+                   </thead>
+                   <tbody>
+                    <tr *ngFor="let item of obdata ; let i=index" (click)="tableselectedrowclick(item , i)" [class.active]="item == selectedrow">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>{{item.age}}</td>
+                        
+                    </tr>
+                   </tbody>
+                </table>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <button (click)="getrow()">Submit</button>
+        </div>
+        <div class="col-sm-4">
+            <div>
+                <h1>Food Members 2</h1>
+            </div>
+            <div>
+                <table class="table">
+                   <thead>
+                    <tr>
+                        <th>ID</th>
+                        <th>Name</th>
+                        <th>Gender</th>
+                        <th>Age</th>
+                        <th>remove</th>
+                    </tr>
+                   </thead>
+                   <tbody>
+                    <tr *ngFor="let item of obdatasecond ; let i=index">
+                        <td>{{item.id}}</td>
+                        <td>{{item.name}}</td>
+                        <td>{{item.gender}}</td>
+                        <td>{{item.age}}</td>
+                        <td><button (click)="removeitem(item,i)"></button></td>
+                    </tr>
+                   </tbody>
+                </table>
+            </div>
+        </div>
+    </div>
+    <div class="row">
+        <div>
+            <h1>Using ngtemplate with for loop</h1>
+        </div>
+        <div>
+            <ng-template ngFor let-item [ngForOf]="obdata">
+             <p>{{item.id}} : {{item.name}} : {{item.gender}} : {{item.age}}</p>
+            </ng-template>
+        </div>
+    </div>
+    <div class="row">
+        <!-- <div *ngIf="demotemplate">
+            <h1>I am Div with *ngIf</h1>
+        </div>
+        <ng-template [ngIf]="demotemplate">
+            <h1>I am Ng Template</h1>
+        </ng-template> -->
+        <div *ngIf="demotemplate ; else elseblocktemp">
+            <h1>I am Div with *ngIf with else</h1>
+        </div>
+        <ng-template #elseblocktemp>
+            <h1>I am Ng Template reference variable</h1>
+        </ng-template>
+        <ng-template [ngIf]="demotemplate">
+            <h2>I an ngtemplate with [ngIf]</h2>
+        </ng-template>
+    </div>
+    <app-home #homeRef> </app-home>
+</div>
